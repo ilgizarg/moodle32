@@ -1,0 +1,196 @@
+/**
+ * Tour step must sit above all other UI components.
+ * The backdrop is the lowest point in the tour.
+ * Everything else is in the container, and the target background should be at the same z-index.
+ * ----- moodle
+ *  ---- step backdrop
+ *   --- step container
+ *   --- step target background
+ */
+div[data-flexitour="backdrop"] {
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 1040;
+}
+div[data-flexitour="step-background-fader"] {
+    border-radius: 0.3rem;
+    z-index: 1040 + 1;
+    z-index: 1040 + 2;
+}
+div[data-flexitour="step-background"] {
+    border-radius: 0.3rem;
+    z-index: 1040 + 1;
+}
+span[data-flexitour="container"] {
+    z-index: 1040 + 2;
+    .modal-dialog {
+        margin: 0;
+    }
+    div[data-role="arrow"] {
+        border-width: 11px;
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 10px;
+        &:after {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 10px;
+        }
+    }
+}
+[data-flexitour="step-backdrop"] {
+    >td {
+        z-index: 1040 + 2;
+    }
+    z-index: 1040 + 2;
+}
+span[data-flexitour="container"][x-placement="top"] {
+    margin-bottom: 10px;
+    div[data-role="arrow"] {
+        bottom: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-bottom-width: 0;
+        border-top-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            bottom: 1px;
+            margin-left: -10px;
+            content: " ";
+            border-bottom-width: 0;
+            border-top-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="top-start"] {
+    margin-bottom: 10px;
+    div[data-role="arrow"] {
+        bottom: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-bottom-width: 0;
+        border-top-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            bottom: 1px;
+            margin-left: -10px;
+            content: " ";
+            border-bottom-width: 0;
+            border-top-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="bottom"] {
+    margin-top: 10px;
+    div[data-role="arrow"] {
+        top: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-top-width: 0;
+        border-bottom-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            top: 1px;
+            margin-left: -10px;
+            content: " ";
+            border-top-width: 0;
+            border-bottom-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="bottom-start"] {
+    margin-top: 10px;
+    div[data-role="arrow"] {
+        top: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-top-width: 0;
+        border-bottom-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            top: 1px;
+            margin-left: -10px;
+            content: " ";
+            border-top-width: 0;
+            border-bottom-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="left"] {
+    margin-right: 10px;
+    div[data-role="arrow"] {
+        right: -11px;
+        top: 50%;
+        margin-top: -11px;
+        border-right-width: 0;
+        border-left-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            right: 1px;
+            margin-top: -10px;
+            content: " ";
+            border-right-width: 0;
+            border-left-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="left-start"] {
+    margin-right: 10px;
+    div[data-role="arrow"] {
+        right: -11px;
+        top: 50%;
+        margin-top: -11px;
+        border-right-width: 0;
+        border-left-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            right: 1px;
+            margin-top: -10px;
+            content: " ";
+            border-right-width: 0;
+            border-left-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="right"] {
+    margin-left: 10px;
+    div[data-role="arrow"] {
+        left: -11px;
+        top: 50%;
+        margin-top: -11px;
+        border-left-width: 0;
+        border-right-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            left: 1px;
+            margin-top: -10px;
+            content: " ";
+            border-left-width: 0;
+            border-right-color: #fff;
+        }
+    }
+}
+span[data-flexitour="container"][x-placement="right-start"] {
+    margin-left: 10px;
+    div[data-role="arrow"] {
+        left: -11px;
+        top: 50%;
+        margin-top: -11px;
+        border-left-width: 0;
+        border-right-color: rgba(0, 0, 0, 0.25);
+        &:after {
+            left: 1px;
+            margin-top: -10px;
+            content: " ";
+            border-left-width: 0;
+            border-right-color: #fff;
+        }
+    }
+}
+[data-region="drawer"] {
+    [data-flexitour="container"] {
+        margin-left: -15px;
+        width: 275px;
+    }
+}
