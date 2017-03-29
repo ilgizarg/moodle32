@@ -65,6 +65,26 @@ class course_edit_form extends moodleform {
 			$mform->setConstant('fullname', $course->fullname);
 		}
 
+		/*Course index ucheb plan*/
+		$mform->addElement('text', 'courseindx', get_string('courseindxcourse'), 'maxlength="254" size="50"');
+		$mform->addHelpButton('courseindx', 'courseindxcourse');
+		$mform->addRule('courseindx', get_string('missingcourseindx'), 'required', null, 'client');
+		$mform->setType('courseindx', PARAM_TEXT);
+		if (!empty($course->id) and !has_capability('moodle/course:changefullname', $coursecontext)) {
+			$mform->hardFreeze('courseindx');
+			$mform->setConstant('courseindx', $course->courseindx);
+		}
+
+		/*Kafedra info*/
+		$mform->addElement('text', 'kafedra', get_string('kafedracourse'), 'maxlength="254" size="50"');
+		$mform->addHelpButton('kafedra', 'kafedracourse');
+		$mform->addRule('kafedra', get_string('missingkafedra'), 'required', null, 'client');
+		$mform->setType('kafedra', PARAM_TEXT);
+		if (!empty($course->id) and !has_capability('moodle/course:changefullname', $coursecontext)) {
+			$mform->hardFreeze('kafedra');
+			$mform->setConstant('kafedra', $course->kafedra);
+		}
+
 		$mform->addElement('text', 'shortname', get_string('shortnamecourse'), 'maxlength="100" size="20"');
 		$mform->addHelpButton('shortname', 'shortnamecourse');
 		$mform->addRule('shortname', get_string('missingshortname'), 'required', null, 'client');
@@ -156,6 +176,39 @@ class course_edit_form extends moodleform {
 			$mform->removeElement('descriptionhdr');
 			$mform->hardFreeze($summaryfields);
 		}
+
+		/**
+		 *
+		 **** Course instruction. **
+		 */
+
+		$mform->addElement('header', 'instructionhdr', get_string('instruction'));
+		$mform->setExpanded('instructionhdr');
+
+		$mform->addElement('editor', 'instruction_editor', get_string('courseinstruction'), null, $editoroptions);
+		$mform->addHelpButton('instruction_editor', 'courseinstruction');
+		$mform->setType('instruction_editor', PARAM_RAW);
+		$summaryfields = 'instruction_editor';
+
+		//Course Work plan file options
+
+		if ($workprogrammfilesoptions = course_workprogramfiles_options($course)) {
+
+			$mform->addElement('filemanager', 'workprogrammfiles_filemanager', get_string('courseworkprogrammfiles'), null, $workprogrammfilesoptions);
+			$mform->addHelpButton('workprogrammfiles_filemanager', 'courseworkprogrammfiles');
+			$summaryfields .= ',workprogrammfiles_filemanager';
+
+		}
+
+		if (!empty($course->id) and !has_capability('moodle/course:changesummary', $coursecontext)) {
+			// Remove the description header it does not contain anything any more.
+			$mform->removeElement('instructionhdr');
+			$mform->hardFreeze($summaryfields);
+		}
+
+		/**
+		 **** End Course instruction. **
+		 */
 
 		// Course format.
 		$mform->addElement('header', 'courseformathdr', get_string('type_format', 'plugin'));
