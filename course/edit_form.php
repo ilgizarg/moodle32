@@ -188,7 +188,7 @@ class course_edit_form extends moodleform {
 		$mform->addElement('editor', 'instruction_editor', get_string('courseinstruction'), null, $editoroptions);
 		$mform->addHelpButton('instruction_editor', 'courseinstruction');
 		$mform->setType('instruction_editor', PARAM_RAW);
-		$summaryfields = 'instruction_editor';
+		$instructionfields = 'instruction_editor';
 
 		//Course Work plan file options
 
@@ -196,14 +196,14 @@ class course_edit_form extends moodleform {
 
 			$mform->addElement('filemanager', 'workprogrammfiles_filemanager', get_string('courseworkprogrammfiles'), null, $workprogrammfilesoptions);
 			$mform->addHelpButton('workprogrammfiles_filemanager', 'courseworkprogrammfiles');
-			$summaryfields .= ',workprogrammfiles_filemanager';
+			$instructionfields .= ',workprogrammfiles_filemanager';
 
 		}
 
 		if (!empty($course->id) and !has_capability('moodle/course:changesummary', $coursecontext)) {
 			// Remove the description header it does not contain anything any more.
 			$mform->removeElement('instructionhdr');
-			$mform->hardFreeze($summaryfields);
+			$mform->hardFreeze($instructionfields);
 		}
 
 		/**

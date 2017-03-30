@@ -2324,8 +2324,9 @@ function create_course($data, $editoroptions = NULL) {
 		$data->summary_format = FORMAT_HTML;
 		$data->instruction = '';
 		$data->instruction_format = FORMAT_HTML;
+	} else {
+		$data->instruction_format = FORMAT_HTML;
 	}
-
 	if (!isset($data->visible)) {
 		// data not from form, add missing visibility info
 		$data->visible = $category->visible;
@@ -2351,7 +2352,7 @@ function create_course($data, $editoroptions = NULL) {
 		//add work programm
 	}
 
-	if ($workprogrammfilesoptions = course_workprogramfiles_options($course)) {
+	if ($workprogrammfilesoptions = course_workprogramfiles_options($newcourseid)) {
 		$data = file_postupdate_standard_filemanager($data, 'workprogrammfiles', $workprogrammfilesoptions, $context, 'course', 'workprogrammfiles', 0);
 	}
 
@@ -2679,6 +2680,9 @@ class course_request {
 		// Summary is a required field so copy the text over
 		$data->summary = $data->summary_editor['text'];
 		$data->summaryformat = $data->summary_editor['format'];
+
+		$data->instruction = $data->instruction_editor['text'];
+		$data->instructionformat = $data->instruction_editor['format'];
 
 		$data->id = $DB->insert_record('course_request', $data);
 
